@@ -216,6 +216,10 @@ create_and_load_lilv_word (PluginManager * self)
 #ifdef FLATPAK_BUILD
       self->lv2_path = g_strdup_printf (
         "%s/.lv2:/app/lib/lv2:"
+        "/var/run/host/usr/local/lib64/lv2:"
+        "/var/run/host/usr/local/lib/lv2:"
+        "/var/run/host/usr/lib64/lv2:"
+        "/var/run/host/usr/lib/lv2:"
         "/app/extensions/Plugins/lv2:%s",
         g_get_home_dir (), extra_zrythm_plugin_paths);
 #elif defined(_WOE32)
@@ -461,7 +465,12 @@ get_vst_paths (PluginManager * self)
   if (!vst_path || (strlen (vst_path) == 0))
     {
 #    ifdef FLATPAK_BUILD
-      vst_path = g_strdup ("/app/extensions/Plugins/vst");
+      vst_path = g_strdup(
+        "/var/run/host/usr/lib/vst:"
+        "/var/run/host/usr/lib64/vst:"
+        "/var/run/host/usr/local/lib/vst:"
+        "/var/run/host/usr/local/lib64/vst:"
+        "/app/extensions/Plugins/vst");
 #    elif defined(INSTALLER_VER)
       vst_path = g_strdup_printf (
         "%s/.vst:%s/vst:"
@@ -528,7 +537,12 @@ get_vst3_paths (PluginManager * self)
   if (!vst_path || (strlen (vst_path) == 0))
     {
 #    ifdef FLATPAK_BUILD
-      vst_path = g_strdup ("/app/extensions/Plugins/vst3");
+      vst_path = g_strdup(
+        "/var/run/host/usr/lib/vst3:"
+        "/var/run/host/usr/lib64/vst3:"
+        "/var/run/host/usr/local/lib/vst3:"
+        "/var/run/host/usr/local/lib64/vst3:"
+        "/app/extensions/Plugins/vst3");
 #    elif defined(INSTALLER_VER)
       vst_path = g_strdup_printf (
         "%s/.vst3:"
@@ -701,7 +715,12 @@ get_dssi_paths (PluginManager * self)
   if (!dssi_path || (strlen (dssi_path) == 0))
     {
 #  ifdef FLATPAK_BUILD
-      dssi_path = g_strdup ("/app/extensions/Plugins/dssi");
+      dssi_path = g_strdup(
+        "/var/run/host/usr/lib/dssi:"
+        "/var/run/host/usr/lib64/dssi:"
+        "/var/run/host/usr/local/lib/dssi:"
+        "/var/run/host/usr/local/lib64/dssi:"
+        "/app/extensions/Plugins/dssi");
 #  elif defined(INSTALLER_VER)
       dssi_path = g_strdup (
         "/usr/lib/dssi:"
@@ -753,8 +772,12 @@ get_ladspa_paths (PluginManager * self)
   if (!ladspa_path || (strlen (ladspa_path) == 0))
     {
 #  ifdef FLATPAK_BUILD
-      ladspa_path =
-        g_strdup ("/app/extensions/Plugins/ladspa");
+      ladspa_path = g_strdup(
+        "/var/run/host/usr/lib/ladspa:"
+        "/var/run/host/usr/lib64/ladspa:"
+        "/var/run/host/usr/local/lib/ladspa:"
+        "/var/run/host/usr/local/lib64/ladspa:"
+        "/app/extensions/Plugins/ladspa");
 #  elif defined(INSTALLER_VER)
       ladspa_path = g_strdup (
         "/usr/lib/ladspa:"
@@ -820,7 +843,12 @@ get_clap_paths (PluginManager * self)
   if (!clap_path || (strlen (clap_path) == 0))
     {
 #    ifdef FLATPAK_BUILD
-      clap_path = g_strdup ("/app/extensions/Plugins/clap");
+      clap_path = g_strdup(
+        "/var/run/host/usr/lib/clap:"
+        "/var/run/host/usr/lib64/clap:"
+        "/var/run/host/usr/local/lib/clap:"
+        "/var/run/host/usr/local/lib64/clap:"
+        "/app/extensions/Plugins/clap");
 #    elif defined(INSTALLER_VER)
       clap_path = g_strdup_printf (
         "%s/.clap:%s/.local/lib/clap:"
